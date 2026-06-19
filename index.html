@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 造物社区 Signal Scanner · Raygen Innovation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FBF5EA;--bg-2:#F6ECDA;--ink:#2B2A20;--ink-soft:#605C4C;
+    --terra:#D2613A;--terra-deep:#B64E2C;--sage:#6E7A4F;--sage-soft:#9BA678;
+    --peach:#F4C9A3;--brand:#E2231A;--line:#E6D9C2;--maxw:1160px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:"Noto Sans SC","Hanken Grotesk",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px}
+  .cn{font-family:"Noto Sans SC",sans-serif}
+  .cn-display{font-family:"Noto Sans SC",sans-serif;font-weight:900;letter-spacing:-.01em;line-height:1.18}
+  .mono{font-family:"Space Mono",monospace}
+  a{color:inherit;text-decoration:none}
+  .en-sub{font-family:"Bricolage Grotesque",sans-serif;font-weight:600;color:var(--ink-soft);letter-spacing:-.01em}
+  .eyebrow{font-family:"Space Mono",monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--terra);display:inline-flex;align-items:center;gap:8px}
+  .eyebrow::before{content:"";width:18px;height:2px;background:var(--terra);display:inline-block}
+  .eyebrow .zh{font-family:"Noto Sans SC";letter-spacing:.04em}
+  .btn{display:inline-flex;align-items:center;gap:9px;font-family:"Noto Sans SC";font-weight:700;font-size:15.5px;padding:14px 26px;border-radius:999px;background:var(--terra);color:#fff;border:2px solid var(--terra);transition:transform .15s,background .15s,box-shadow .15s;box-shadow:0 0 0 rgba(0,0,0,0)}
+  .btn:hover{transform:translateY(-3px);background:var(--terra-deep);border-color:var(--terra-deep);box-shadow:0 10px 24px rgba(210,97,58,.28)}
+  .btn .en{font-family:"Bricolage Grotesque";font-weight:600;opacity:.82;font-size:13px}
+  .btn--out{background:transparent;color:var(--ink);border:2px solid var(--ink)}
+  .btn--out:hover{background:var(--ink);color:var(--bg);box-shadow:none}
+  .btn--sage{background:var(--sage);border-color:var(--sage)}
+  .btn--sage:hover{background:#5b6640;border-color:#5b6640;box-shadow:0 10px 24px rgba(110,122,79,.28)}
+
+  header{position:sticky;top:0;z-index:50;background:rgba(251,245,234,.85);backdrop-filter:blur(10px)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:76px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .brand img{height:34px;width:auto;display:block}
+  .brand .div{width:1px;height:26px;background:var(--line)}
+  .brand .prod{font-family:"Space Mono";font-size:11px;line-height:1.4;color:var(--ink-soft)}
+  .brand .prod b{color:var(--ink);font-weight:700}
+  .nav-links{display:flex;gap:26px}
+  .nav-links a{font-size:15px;font-weight:500;color:var(--ink-soft)}
+  .nav-links a:hover{color:var(--terra)}
+  @media(max-width:920px){.nav-links{display:none}.brand .prod{display:none}.brand .div{display:none}}
+
+  .hero{position:relative;padding:60px 0 84px;overflow:hidden}
+  .blob{position:absolute;border-radius:50% 50% 48% 52%/52% 48% 52% 48%;filter:blur(2px);opacity:.55;z-index:0}
+  .b1{width:340px;height:340px;background:var(--peach);top:-60px;right:-40px}
+  .b2{width:260px;height:260px;background:var(--sage-soft);bottom:-80px;left:-60px;opacity:.4}
+  .hero .wrap{position:relative;z-index:2}
+  .hero-tag{margin-bottom:22px}
+  .hero h1{font-family:"Noto Sans SC";font-weight:900;font-size:clamp(38px,6.4vw,76px);line-height:1.1;letter-spacing:-.01em}
+  .hero h1 .scan{color:var(--terra);font-family:"Bricolage Grotesque";font-weight:800;letter-spacing:-.03em}
+  .hero h1 .leaf-inline{display:inline-block;width:.66em;color:var(--brand);vertical-align:-.04em;margin:0 .04em}
+  .hero .en-line{font-family:"Bricolage Grotesque";font-weight:700;font-size:clamp(17px,2.2vw,25px);letter-spacing:-.02em;color:var(--ink-soft);margin-top:14px}
+  .hero .sub{font-size:clamp(16px,1.9vw,19px);color:var(--ink-soft);max-width:52ch;margin-top:24px;font-weight:400}
+  .hero .sub .en{display:block;font-family:"Hanken Grotesk";font-size:14.5px;color:var(--ink-soft);opacity:.85;margin-top:8px}
+  .hero-actions{display:flex;gap:14px;align-items:center;margin-top:32px;flex-wrap:wrap}
+  .hero-foot{margin-top:26px;display:inline-flex;align-items:center;gap:10px;font-size:13.5px;font-weight:500;color:var(--ink-soft);background:var(--bg-2);border:1px solid var(--line);padding:9px 16px;border-radius:999px}
+  .seed{width:9px;height:9px;border-radius:50%;background:var(--sage)}
+
+  section{padding:78px 0;position:relative}
+  .sec-head{max-width:760px;margin-bottom:42px}
+  .sec-head h2{font-family:"Noto Sans SC";font-weight:900;font-size:clamp(27px,3.8vw,44px);line-height:1.2;letter-spacing:-.01em;margin-top:14px}
+  .sec-head .en-sub{display:block;font-size:clamp(15px,1.9vw,21px);margin-top:8px}
+  .sec-head p{color:var(--ink-soft);font-size:16px;margin-top:16px;font-weight:400;max-width:66ch}
+  .sec-head p .en{display:block;font-family:"Hanken Grotesk";font-size:14px;opacity:.82;margin-top:5px}
+
+  .about{background:var(--sage);color:#F7F3E8;border-radius:40px;margin:0 14px}
+  .about .eyebrow{color:var(--peach)}.about .eyebrow::before{background:var(--peach)}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start}
+  .about-lead{font-family:"Noto Sans SC";font-weight:700;font-size:clamp(21px,2.8vw,30px);line-height:1.42;letter-spacing:-.01em}
+  .about-lead .en{display:block;font-family:"Bricolage Grotesque";font-weight:600;font-size:clamp(14px,1.7vw,18px);color:rgba(247,243,232,.72);margin-top:12px;line-height:1.35}
+  .about p.body{color:rgba(247,243,232,.9);font-size:15.5px;font-weight:400}
+  .about p.body .en{display:block;font-family:"Hanken Grotesk";font-size:13.5px;color:rgba(247,243,232,.66);margin-top:8px}
+  @media(max-width:820px){.about-grid{grid-template-columns:1fr;gap:24px}}
+
+  .receive-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .rcard{background:var(--bg-2);border:1.5px solid var(--line);border-radius:22px;padding:26px;min-height:172px;display:flex;flex-direction:column;transition:transform .15s,box-shadow .15s,border-color .15s}
+  .rcard:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(43,42,32,.08);border-color:var(--terra)}
+  .rcard .ic{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-family:"Space Mono";font-weight:700;font-size:14px;color:#fff;background:var(--terra);margin-bottom:18px}
+  .rcard:nth-child(2) .ic{background:var(--sage)}.rcard:nth-child(3) .ic{background:var(--ink)}
+  .rcard:nth-child(4) .ic{background:var(--sage)}.rcard:nth-child(5) .ic{background:var(--ink)}.rcard:nth-child(6) .ic{background:var(--sage)}
+  .rcard h3{font-family:"Noto Sans SC";font-weight:700;font-size:18.5px;letter-spacing:-.01em;margin-top:0;line-height:1.45}
+  .rcard h3 .t{display:block;min-height:2.9em}
+  .rcard h3 .en{display:block;font-family:"Hanken Grotesk";font-weight:500;font-size:13px;color:var(--ink-soft);margin-top:8px;line-height:1.3}
+  .rcard.feature{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+  .rcard.feature h3{font-size:22px}
+  .rcard.feature h3 .en{color:rgba(251,245,234,.6)}
+  .rcard.feature .ic{background:var(--brand)}
+  @media(max-width:860px){.receive-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.receive-grid{grid-template-columns:1fr}.rcard{min-height:0}}
+
+  .areas .area-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+  .area{position:relative;border-radius:18px;padding:22px 18px;min-height:150px;display:flex;flex-direction:column;align-items:flex-start;background:var(--bg-2);border:1.5px solid var(--line);transition:transform .15s,background .15s,color .15s;overflow:hidden;cursor:default}
+  .area:hover{transform:translateY(-4px);background:var(--terra);color:#fff;border-color:var(--terra)}
+  .area:hover .tag{color:rgba(255,255,255,.85)}
+  .area:hover h3 .en{color:rgba(255,255,255,.78)}
+  .area .tag{font-family:"Space Mono";font-size:10.5px;letter-spacing:.08em;color:var(--terra);margin-bottom:16px}
+  .area h3{font-family:"Noto Sans SC";font-weight:700;font-size:14.5px;line-height:1.45;letter-spacing:-.01em}
+  .area h3 .t{display:block;min-height:2.9em}
+  .area h3 .en{display:block;font-family:"Hanken Grotesk";font-weight:500;font-size:11.5px;color:var(--ink-soft);margin-top:8px;line-height:1.3}
+  .area.lead{background:var(--sage);color:#fff;border-color:var(--sage)}
+  .area.lead .tag{color:var(--peach)}
+  .area.lead h3 .en{color:rgba(255,255,255,.78)}
+  .area.lead:hover{background:#5b6640}
+  @media(max-width:1000px){.areas .area-grid{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:680px){.areas .area-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:440px){.areas .area-grid{grid-template-columns:1fr}.area{min-height:0}}
+
+  .who{background:var(--bg-2);border-radius:40px;margin:0 14px}
+  .who-grid{display:flex;flex-wrap:wrap;gap:12px}
+  .chip{display:inline-flex;align-items:center;gap:10px;background:var(--bg);border:1.5px solid var(--line);padding:12px 20px;border-radius:999px;font-size:15.5px;font-weight:500;transition:transform .12s,border-color .12s}
+  .chip:hover{transform:translateY(-2px);border-color:var(--terra)}
+  .chip .e{font-family:"Space Mono";font-size:13px;color:var(--terra);font-weight:700}
+  .chip:nth-child(2n) .e{color:var(--sage)}
+  .chip .en{font-family:"Hanken Grotesk";font-size:12.5px;color:var(--ink-soft);font-weight:400}
+
+  .why-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:46px;align-items:center}
+  .steps{display:grid;gap:14px}
+  .step{display:flex;gap:18px;align-items:flex-start;background:var(--bg-2);border:1.5px solid var(--line);border-radius:20px;padding:22px 24px}
+  .step .k{width:40px;height:40px;flex:none;border-radius:50%;background:var(--terra);color:#fff;display:flex;align-items:center;justify-content:center;font-family:"Bricolage Grotesque";font-weight:700}
+  .step:nth-child(2) .k{background:var(--sage)}.step:nth-child(3) .k{background:var(--ink)}
+  .step h4{font-family:"Noto Sans SC";font-weight:700;font-size:17px}
+  .step p{color:var(--ink-soft);font-size:14.5px;margin-top:3px;font-weight:400}
+  .step p .en{font-family:"Hanken Grotesk";opacity:.82}
+  @media(max-width:820px){.why-grid{grid-template-columns:1fr;gap:28px}}
+
+  .cta-card{background:var(--terra);color:#fff;border-radius:36px;overflow:hidden;display:grid;grid-template-columns:1.2fr .8fr;position:relative}
+  .cta-card .cblob{position:absolute;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.08);top:-80px;left:-60px}
+  .cta-main{padding:54px 48px;position:relative;z-index:2}
+  .cta-main h2{font-family:"Noto Sans SC";font-weight:900;font-size:clamp(28px,4vw,46px);line-height:1.2;letter-spacing:-.01em}
+  .cta-main .en-line{font-family:"Bricolage Grotesque";font-weight:700;font-size:clamp(15px,1.9vw,21px);color:rgba(255,255,255,.82);margin-top:8px;letter-spacing:-.01em}
+  .cta-main p{color:rgba(255,255,255,.9);font-size:15.5px;margin-top:16px;font-weight:400;max-width:48ch}
+  .cta-main p .en{display:block;font-family:"Hanken Grotesk";font-size:13.5px;color:rgba(255,255,255,.74);margin-top:6px}
+  form.signup{margin-top:28px;display:flex;flex-direction:column;gap:16px;max-width:480px}
+  .field{display:flex;gap:10px}
+  .field input{flex:1;font-family:"Noto Sans SC";font-weight:400;font-size:15px;padding:16px 18px;border-radius:14px;border:2px solid rgba(255,255,255,.45);background:rgba(255,255,255,.14);color:#fff}
+  .field input::placeholder{color:rgba(255,255,255,.78)}
+  .field input:focus{outline:none;border-color:#fff;background:rgba(255,255,255,.2)}
+  .field .btn{background:var(--ink);border-color:var(--ink);color:#fff;white-space:nowrap}
+  .field .btn:hover{background:#000;border-color:#000}
+  .interest-label{font-family:"Space Mono";font-size:12px;color:rgba(255,255,255,.85);letter-spacing:.04em}
+  .interests{display:flex;flex-wrap:wrap;gap:8px}
+  .pick{font-size:13.5px;font-weight:500;padding:9px 15px;border-radius:999px;cursor:pointer;border:2px solid rgba(255,255,255,.45);color:#fff;background:transparent;transition:.13s;user-select:none}
+  .pick.on{background:#fff;color:var(--terra);border-color:#fff;font-weight:700}
+  .cta-join{background:var(--ink);border-color:var(--ink);color:#fff;margin-top:28px;font-size:16.5px;padding:16px 30px}
+  .cta-join:hover{background:#000;border-color:#000}
+  .cta-note{font-family:"Noto Sans SC";font-size:12.5px;color:rgba(255,255,255,.78);line-height:1.5;margin-top:16px;max-width:48ch}
+  .cta-note .en{display:block;font-family:"Hanken Grotesk";color:rgba(255,255,255,.62);margin-top:2px}
+  .cta-side{background:rgba(0,0,0,.12);padding:40px 34px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;position:relative;z-index:2}
+  .cta-side .sidelogo{height:26px;width:auto;margin-bottom:4px}
+  .qr{width:148px;height:148px;border-radius:18px;background:#fff;border:2px solid rgba(255,255,255,.4);padding:10px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .qr img{width:100%;height:100%;object-fit:contain;display:block}
+  .cta-side .label{font-size:14px;font-weight:500}
+  .cta-side .label .en{display:block;font-family:"Hanken Grotesk";font-size:12px;color:rgba(255,255,255,.72)}
+  .cta-side .contact{font-family:"Space Mono";font-size:12px;color:rgba(255,255,255,.8)}
+  @media(max-width:860px){.cta-card{grid-template-columns:1fr}.cta-main{padding:38px 28px}.cta-side{flex-direction:row;gap:28px;flex-wrap:wrap}}
+  @media(max-width:520px){.field{flex-direction:column}.cta-side{flex-direction:column}}
+
+  footer{padding:46px 0 40px}
+  .foot{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;color:var(--ink-soft);font-size:13.5px;font-weight:400}
+  .foot img{height:30px;width:auto;display:block}
+  .foot .fr{text-align:right}
+  .foot .fr .en{display:block;font-family:"Hanken Grotesk";font-size:12px;opacity:.7;margin-top:2px}
+  .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--bg);padding:14px 24px;border-radius:999px;font-size:14.5px;font-weight:500;opacity:0;pointer-events:none;transition:.25s;z-index:80}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body id="top">
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top">
+      <img src="assets/raygen-dark.png" alt="Raygen Innovation">
+      <span class="div"></span>
+      <span class="prod"><b>Signal Scanner</b><br>AI 造物社区 · 信号订阅</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#about">这是什么</a>
+      <a href="#receive">你会收到</a>
+      <a href="#areas">关注方向</a>
+      <a href="#who">适合谁</a>
+    </nav>
+    <a class="btn" href="#join">加入 Waitlist <span class="en">Join</span></a>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="blob b1"></div><div class="blob b2"></div>
+    <div class="wrap">
+      <span class="eyebrow hero-tag"><span class="zh">信号订阅入口</span> · Signal Subscription</span>
+      <h1 class="cn">AI 造物社区<br><span class="scan">Signal Scanner</span></h1>
+      <p class="en-line">AI Creation Community Signal Scanner</p>
+      <p class="sub">订阅真实 AI 落地项目、工具趋势与共创机会。
+        <span class="en">Subscribe to real-world AI project signals, tool trends, and co-creation opportunities.</span>
+      </p>
+      <div class="hero-actions">
+        <a class="btn" href="#join">加入 Waitlist <span class="en">Join the Waitlist →</span></a>
+        <a class="btn btn--out" href="#about">了解运作方式</a>
+      </div>
+      <div class="hero-foot"><span class="seed"></span> 由 Raygen Innovation · AI 造物社区 出品的社区信号系统</div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="wrap about-grid">
+      <div>
+        <span class="eyebrow"><span class="zh">这是什么</span> · What it is</span>
+        <p class="about-lead" style="margin-top:16px">一个面向创造者、开发者和项目方的信号订阅入口。
+          <span class="en">A signal subscription entry for creators, developers, and project builders.</span>
+        </p>
+      </div>
+      <div>
+        <p class="body"><strong style="color:#FBF6EC">Signal 不只是前沿信息，也包括真实项目线索、工具趋势、案例观察和共创机会。</strong>我们把值得持续追踪的内容整理成 Signal，帮助你更早看见正在发生的 AI 造物方向。
+          <span class="en">A Signal is more than frontier intel. It can be a real project lead, a tool trend, a case insight, or a chance to co-create. We organize what is worth tracking into signals, so you can see emerging AI creation directions earlier.</span>
+        </p>
+        <p class="body" style="margin-top:18px">AI 造物社区 Signal Scanner 会持续整理真实 AI 落地项目、AI 工具与工作流、智能硬件、机器人、HCI、ESG、农业、FemTech、照护科技、开发者生态动态，以及可以参与的共创机会。
+          <span class="en">AI Creation Community Signal Scanner curates real-world AI projects, AI tools and workflows, smart hardware, robotics, HCI, ESG, agriculture, FemTech, care tech, developer ecosystem updates, and co-creation opportunities you can participate in.</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- RECEIVE -->
+  <section id="receive">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow"><span class="zh">你会收到什么</span> · What you'll receive</span>
+        <h2 class="cn">六类持续更新的 Signal<span class="en-sub">Signals we send, regularly tuned.</span></h2>
+      </div>
+      <div class="receive-grid">
+        <div class="rcard feature"><div class="ic">✦</div><h3><span class="t">真实 AI 落地项目</span><span class="en">Real-world AI project signals</span></h3></div>
+        <div class="rcard"><div class="ic">02</div><h3><span class="t">工具、Agent 与工作流趋势</span><span class="en">Tool, agent &amp; workflow trends</span></h3></div>
+        <div class="rcard"><div class="ic">03</div><h3><span class="t">智能硬件、机器人与 HCI 案例</span><span class="en">Smart hardware, robotics &amp; HCI cases</span></h3></div>
+        <div class="rcard"><div class="ic">04</div><h3><span class="t">ESG、农业、照护科技等真实场景</span><span class="en">Real scenarios in ESG, agriculture &amp; care tech</span></h3></div>
+        <div class="rcard"><div class="ic">05</div><h3><span class="t">Google / NVIDIA / OpenUSD 开发者生态</span><span class="en">Dev ecosystem updates — Google, NVIDIA, OpenUSD &amp; more</span></h3></div>
+        <div class="rcard"><div class="ic">06</div><h3><span class="t">社区活动、田野营与共创机会</span><span class="en">Community events, field labs &amp; co-creation</span></h3></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AREAS -->
+  <section class="areas" id="areas">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow"><span class="zh">关注方向</span> · Signal areas</span>
+        <h2 class="cn">十个我们持续扫描的方向<span class="en-sub">Ten directions we scan.</span></h2>
+        <p>加入时选择你关注的方向，你的信号流会围绕它们生长。<span class="en">Pick what you care about when you join — your stream grows around them.</span></p>
+      </div>
+      <div class="area-grid">
+        <div class="area"><span class="tag">ESG</span><h3><span class="t">AI × ESG / 循环经济</span><span class="en">ESG / Circular Economy</span></h3></div>
+        <div class="area"><span class="tag">AGRI</span><h3><span class="t">AI × 农业 / 土地 / 农场生命系统</span><span class="en">Agriculture / Land / Farm Ecosystems</span></h3></div>
+        <div class="area"><span class="tag">FEMTECH</span><h3><span class="t">AI × FemTech / 女性健康硬件</span><span class="en">FemTech / Women's Health Hardware</span></h3></div>
+        <div class="area"><span class="tag">CARE</span><h3><span class="t">AI × 照护科技 / Assistive Tech</span><span class="en">Care Tech / Assistive Tech</span></h3></div>
+        <div class="area"><span class="tag">HCI</span><h3><span class="t">AI × HCI / 交互体验</span><span class="en">HCI / Interaction Experience</span></h3></div>
+        <div class="area"><span class="tag">ROBOTICS</span><h3><span class="t">AI × 机器人 / 智能硬件</span><span class="en">Robotics / Smart Hardware</span></h3></div>
+        <div class="area"><span class="tag">TOOLS</span><h3><span class="t">AI 工具 / Agent / 工作流</span><span class="en">AI Tools / Agents / Workflows</span></h3></div>
+        <div class="area"><span class="tag">DEV-ECO</span><h3><span class="t">Google / NVIDIA / OpenUSD 开发者生态</span><span class="en">Developer Ecosystem</span></h3></div>
+        <div class="area"><span class="tag">CREATORS</span><h3><span class="t">女性 / Youth 等非传统技术背景创造者</span><span class="en">Women / Youth / Non-traditional Creators</span></h3></div>
+        <div class="area lead"><span class="tag">PROJECTS</span><h3><span class="t">真实项目案例 / 共创机会</span><span class="en">Real Project Cases / Co-creation</span></h3></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO -->
+  <section class="who" id="who">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow"><span class="zh">适合谁</span> · Who it's for</span>
+        <h2 class="cn">适合关注真实 AI 落地的人<span class="en-sub">For people building in the real world.</span></h2>
+        <p>适合关注真实 AI 落地、智能硬件、机器人、HCI、ESG、农业、开发者生态与跨领域共创的人。<span class="en">For people interested in real-world AI applications, smart hardware, robotics, HCI, ESG, agriculture, developer ecosystems, and cross-disciplinary co-creation.</span></p>
+      </div>
+      <div class="who-grid">
+        <span class="chip"><span class="e">01</span>开发者 / Builder <span class="en">Developers / Builders</span></span>
+        <span class="chip"><span class="e">02</span>产品、设计与 HCI 从业者 <span class="en">Product, Design &amp; HCI</span></span>
+        <span class="chip"><span class="e">03</span>研究者与学生 <span class="en">Researchers &amp; Students</span></span>
+        <span class="chip"><span class="e">04</span>创业者与项目发起人 <span class="en">Founders &amp; Project Owners</span></span>
+        <span class="chip"><span class="e">05</span>投资人、资源方与生态伙伴 <span class="en">Investors &amp; Ecosystem Builders</span></span>
+        <span class="chip"><span class="e">06</span>女性、Youth 与跨领域创造者 <span class="en">Women, Youth &amp; Cross-disciplinary Creators</span></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section id="why">
+    <div class="wrap why-grid">
+      <div>
+        <span class="eyebrow"><span class="zh">为什么现在加入</span> · Why join now</span>
+        <h2 class="cn-display" style="font-size:clamp(27px,3.8vw,42px);margin-top:14px">社区版 Signal Scanner<br>正在准备中</h2>
+        <p class="en-sub" style="font-size:17px;margin-top:8px">The community version is being prepared.</p>
+        <p style="color:var(--ink-soft);font-size:16px;margin-top:18px;font-weight:400;max-width:46ch">加入 Waitlist 后，你将第一时间收到精选 Signal、真实项目案例和后续共创机会。<span style="display:block;font-family:'Hanken Grotesk';font-size:14px;opacity:.82;margin-top:6px">Join the waitlist to receive curated signals, real project cases, and future co-creation opportunities.</span></p>
+        <a class="btn btn--sage" href="#join" style="margin-top:26px">加入 Waitlist <span class="en">Join →</span></a>
+      </div>
+      <div class="steps">
+        <div class="step"><span class="k">1</span><div><h4>留下邮箱与关注方向</h4><p>不到一分钟，选择你关注的领域。<span class="en">Under a minute — pick the directions you care about.</span></p></div></div>
+        <div class="step"><span class="k">2</span><div><h4>我们会参考你的关注方向</h4><p>你选择的方向，会帮助我们整理更适合你的 Signal。<span class="en">Your interests help us curate signals that are more relevant to you.</span></p></div></div>
+        <div class="step"><span class="k">3</span><div><h4>抢先收到第一批信号</h4><p>精选 Signal 与共创邀请最先送到你这里。<span class="en">Curated signals and co-creation invites land with you first.</span></p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="join">
+    <div class="wrap">
+      <div class="cta-card">
+        <div class="cblob"></div>
+        <div class="cta-main">
+          <span class="eyebrow" style="color:var(--peach)"><span class="zh">加入 Waitlist</span> · Join the Waitlist</span>
+          <h2 class="cn" style="margin-top:14px">加入社区版 Signal Scanner Waitlist</h2>
+          <p class="en-line">Join the Community Signal Scanner Waitlist</p>
+          <p>留下邮箱和关注方向。社区版上线后，我们会把精选 Signal、真实项目案例与共创机会发给你。<span class="en">Leave your email and interests. We'll send curated signals, real project cases, and co-creation opportunities when the community version is ready.</span></p>
+          <a class="btn cta-join" href="https://hvr8j5aw2q0.feishu.cn/share/base/form/shrcnRIOcvNWp8copeXg4g2NOgf" target="_blank" rel="noopener">加入 Waitlist <span class="en">Join the Waitlist →</span></a>
+          <p class="cta-note">我们只会根据你的关注方向发送 Signal 与活动信息，不会频繁打扰。<span class="en">We'll only use your email to send relevant signals and community updates.</span></p>
+        </div>
+        <div class="cta-side">
+          <img class="sidelogo" src="assets/raygen-light.png" alt="Raygen Innovation">
+          <a class="qr" href="https://hvr8j5aw2q0.feishu.cn/share/base/form/shrcnRIOcvNWp8copeXg4g2NOgf" target="_blank" rel="noopener"><img src="assets/waitlist-qr.png" alt="加入 Waitlist 表单二维码"></a>
+          <div class="label">扫码加入 Waitlist<span class="en">Or scan to join</span></div>
+          <div class="contact">community@raygen.ai</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <a href="#top"><img src="assets/raygen-dark.png" alt="Raygen Innovation"></a>
+    <span class="fr">© 2026 Raygen Innovation · AI 造物社区 Signal Scanner<span class="en">A signal system for real builders.</span></span>
+  </div>
+</footer>
+
+</body>
+</html>
